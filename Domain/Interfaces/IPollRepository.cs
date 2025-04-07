@@ -10,7 +10,7 @@ namespace Domain.Interfaces
     public interface IPollRepository
     {
         // Get all the polls
-        IEnumerable<Poll> GetAllPolls();
+        IEnumerable<Poll> GetPolls();
 
         // Get a poll by ID
         Poll? GetPollById(int id);

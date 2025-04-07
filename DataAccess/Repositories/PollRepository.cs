@@ -10,7 +10,7 @@ namespace DataAccess.Repositories
         {
             _context = context;
         }
-        public IEnumerable<Poll> GetAllPolls()
+        public IEnumerable<Poll> GetPolls()
         {
             return _context.Polls.ToList();
         }

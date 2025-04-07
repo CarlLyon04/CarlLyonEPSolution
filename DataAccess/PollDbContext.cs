@@ -9,7 +9,7 @@ using Domain.Models;
 
 namespace DataAccess
 {
-    public class PollDbContext : IdentityDbContext
+    public class PollDbContext : IdentityDbContext<User>
     {
         public PollDbContext(DbContextOptions<PollDbContext> options) : base(options)
         {
