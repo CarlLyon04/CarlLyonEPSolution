@@ -18,13 +18,7 @@ namespace Domain.Interfaces
         // Create a new poll
         void CreatePoll(Poll poll);
 
-        // Update an existing poll
-        void UpdatePoll(Poll poll);
-
-
-        // Delete a poll
-        void DeletePoll(int id);
-
-
+        // Vote for a poll option
+        void Vote(int id, Poll specificPoll);
     }
 }

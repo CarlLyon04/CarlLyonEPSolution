@@ -41,21 +41,21 @@ namespace DataAccess.Repositories
         public void Vote(int id, Poll specificPoll)
         {
             int totalVotes = specificPoll.Option1VotesCount + specificPoll.Option2VotesCount + specificPoll.Option3VotesCount;
-            if (totalVotes == 0)
+            if (specificPoll.Id == 1)
             {
-                specificPoll.Option1VotesCount = 1;
+                specificPoll.Option1VotesCount++;
+            }
+            else if (specificPoll.Id == 2)
+            {
+                specificPoll.Option2VotesCount++;
             }
             else
             {
-                if (specificPoll.Option1VotesCount == 0)
-                {
-                    specificPoll.Option1VotesCount = 1;
-                }
-                else
-                {
-                    specificPoll.Option1VotesCount++;
-                }
+                specificPoll.Option3VotesCount++;
             }
+
+            _context.Polls.Update(specificPoll);
+            _context.SaveChanges();
         }
     }
 }

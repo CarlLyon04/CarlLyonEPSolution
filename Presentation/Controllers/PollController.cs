@@ -52,5 +52,13 @@ namespace Presentation.Controllers
             return View(specificPoll);
 
         }
+
+        [HttpPost]
+        public IActionResult Vote(int id, Poll specificPoll)
+        {
+            _pollRepository.Vote(id, specificPoll);
+            return View(specificPoll);
+        }
     }
+
 }
