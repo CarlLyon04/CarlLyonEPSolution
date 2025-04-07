@@ -19,6 +19,6 @@ namespace Domain.Interfaces
         void CreatePoll(Poll poll);
 
         // Vote for a poll option
-        void Vote(int id, Poll specificPoll);
+        void Vote(int id, int chosenOption);
     }
 }

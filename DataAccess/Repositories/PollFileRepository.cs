@@ -45,7 +45,7 @@ namespace DataAccess.Repositories
             File.WriteAllText(filePath, JsonConvert.SerializeObject(polls));
         }
 
-        public void Vote(int id, Poll specificPoll)
+        public void Vote(int id, int chosenOption)
         {
             throw new NotImplementedException();
         }

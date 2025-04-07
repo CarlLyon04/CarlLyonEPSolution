@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Domain.Models.Poll>
+
+<h2>All Polls</h2>
+
+@foreach (var poll in Model)
+{
+    <div style="margin-bottom: 1rem;">
+        <h4>@poll.Title</h4>
+        <a asp-action="Vote" asp-route-id="@poll.Id">Vote</a> |
+        <a asp-action="Results" asp-route-id="@poll.Id">View Results</a>
+    </div>
+}

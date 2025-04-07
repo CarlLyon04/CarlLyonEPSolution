@@ -38,23 +38,27 @@ namespace DataAccess.Repositories
             }
         }
 
-        public void Vote(int id, Poll specificPoll)
+        public void Vote(int id, int chosenOption)
         {
-            int totalVotes = specificPoll.Option1VotesCount + specificPoll.Option2VotesCount + specificPoll.Option3VotesCount;
-            if (specificPoll.Id == 1)
+            var poll = _context.Polls.FirstOrDefault(p => p.Id == id);
+            if (poll == null) return;
+
+            switch (chosenOption)
             {
-                specificPoll.Option1VotesCount++;
-            }
-            else if (specificPoll.Id == 2)
-            {
-                specificPoll.Option2VotesCount++;
-            }
-            else
-            {
-                specificPoll.Option3VotesCount++;
+                case 1:
+                    poll.Option1VotesCount++;
+                    break;
+                case 2:
+                    poll.Option2VotesCount++;
+                    break;
+                case 3:
+                    poll.Option3VotesCount++;
+                    break;
+                default:
+                    return; // invalid option
             }
 
-            _context.Polls.Update(specificPoll);
+            _context.Polls.Update(poll);
             _context.SaveChanges();
         }
     }
