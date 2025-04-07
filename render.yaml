@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: CarlLyonEPSolution
+    runtime: dotnet
+    repo: https://github.com/CarlLyon04/CarlLyonEPSolution
+    branch: main
+    buildCommand: dotnet publish -c Release -o out
+    startCommand: dotnet Presentation.dll
+    workingDir: Presentation
+    env: 
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
+step
