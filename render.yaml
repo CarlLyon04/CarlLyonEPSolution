@@ -3,7 +3,7 @@ services:
     name: CarlLyonEPSolution
     runtime: dotnet
     repo: https://github.com/CarlLyon04/CarlLyonEPSolution
-    branch: main
+    branch: master
     buildCommand: dotnet publish -c Release -o out
     startCommand: dotnet Presentation.dll
     workingDir: Presentation
