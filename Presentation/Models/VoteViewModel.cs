@@ -1,4 +1,6 @@
-﻿namespace Presentation.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Presentation.Models
 {
     public class VoteViewModel
     {
@@ -12,6 +14,7 @@
 
         public string Option3Text { get; set; }
 
+        [Range(1, 3, ErrorMessage = "Please select a valid option.")]
         public int chosenOption { get; set; }
     }
 }

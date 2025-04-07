@@ -1,0 +1,31 @@
+﻿@model Presentation.Models.CreatePollViewModel
+
+<h2 class="mb-4">Create a New Poll</h2>
+
+<form asp-action="Create" method="post" class="needs-validation" novalidate>
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Poll Question</label>
+        <input asp-for="Title" class="form-control" placeholder="e.g., What's the best fruit?" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Option1Text" class="form-label">Option 1</label>
+        <input asp-for="Option1Text" class="form-control" placeholder="e.g., Apple" />
+        <span asp-validation-for="Option1Text" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Option2Text" class="form-label">Option 2</label>
+        <input asp-for="Option2Text" class="form-control" placeholder="e.g., Banana" />
+        <span asp-validation-for="Option2Text" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Option3Text" class="form-label">Option 3</label>
+        <input asp-for="Option3Text" class="form-control" placeholder="e.g., Orange" />
+        <span asp-validation-for="Option3Text" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create Poll</button>
+</form>

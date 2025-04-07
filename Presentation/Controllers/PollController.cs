@@ -77,11 +77,23 @@ namespace Presentation.Controllers
         public IActionResult Vote(VoteViewModel model)
         {
             if (!ModelState.IsValid)
-                return View(model);
+            {
+                var poll = _pollRepository.GetPollById(model.id);
+                model.Title = poll.Title;
+                model.Option1Text = poll.Option1Text;
+                model.Option2Text = poll.Option2Text;
+                model.Option3Text = poll.Option3Text;
+
+                return View("Vote", model);
+            }
 
             _pollRepository.Vote(model.id, model.chosenOption);
             return RedirectToAction("Results", new { id = model.id });
         }
+
+
+
+
 
         // GET: /Poll/Results/5
         public IActionResult Results(int id)

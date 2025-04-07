@@ -1,0 +1,27 @@
+﻿@model Presentation.Models.PollResultsViewModel
+
+<h2 class="mb-4">Results for: <em>@Model.Title</em></h2>
+
+<div class="card p-4 shadow-sm">
+    <div class="mb-3">
+        <strong>@Model.Option1Text:</strong>
+        <span class="badge bg-primary">@Model.Option1VotesCount vote(s)</span>
+    </div>
+
+    <div class="mb-3">
+        <strong>@Model.Option2Text:</strong>
+        <span class="badge bg-success">@Model.Option2VotesCount vote(s)</span>
+    </div>
+
+    <div class="mb-3">
+        <strong>@Model.Option3Text:</strong>
+        <span class="badge bg-warning text-dark">@Model.Option3VotesCount vote(s)</span>
+    </div>
+
+    <hr />
+    <p class="text-muted">
+		<strong>Total Votes:</strong> @Model.Option1VotesCount + @Model.Option2VotesCount + @Model.Option3VotesCount
+    </p>
+
+    <a asp-action="Index" class="btn btn-secondary mt-3">Back to Polls</a>
+</div>
