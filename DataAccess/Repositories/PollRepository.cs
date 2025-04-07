@@ -37,5 +37,25 @@ namespace DataAccess.Repositories
                 _context.SaveChanges();
             }
         }
+
+        public void Vote(int id, Poll specificPoll)
+        {
+            int totalVotes = specificPoll.Option1VotesCount + specificPoll.Option2VotesCount + specificPoll.Option3VotesCount;
+            if (totalVotes == 0)
+            {
+                specificPoll.Option1VotesCount = 1;
+            }
+            else
+            {
+                if (specificPoll.Option1VotesCount == 0)
+                {
+                    specificPoll.Option1VotesCount = 1;
+                }
+                else
+                {
+                    specificPoll.Option1VotesCount++;
+                }
+            }
+        }
     }
 }

@@ -38,5 +38,19 @@ namespace Presentation.Controllers
             return View(poll);
         }
 
+        public IActionResult Read(int id)
+        {
+            var polls = _pollRepository.GetPolls();
+
+            var specificPoll = polls.FirstOrDefault(p => p.Id == id);
+
+            if (specificPoll == null)
+            {
+                return NotFound();
+            }
+
+            return View(specificPoll);
+
+        }
     }
 }
