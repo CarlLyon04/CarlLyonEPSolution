@@ -1,27 +1,38 @@
 ﻿@model Presentation.Models.PollResultsViewModel
 
-<h2 class="mb-4">Results for: <em>@Model.Title</em></h2>
+@{
+    ViewData["Title"] = "Poll Results";
+}
 
-<div class="card p-4 shadow-sm">
-    <div class="mb-3">
-        <strong>@Model.Option1Text:</strong>
-        <span class="badge bg-primary">@Model.Option1VotesCount vote(s)</span>
-    </div>
+<h2 class="mb-4">Poll Results</h2>
+<h4 class="mb-3">@Model.Title</h4>
 
-    <div class="mb-3">
-        <strong>@Model.Option2Text:</strong>
-        <span class="badge bg-success">@Model.Option2VotesCount vote(s)</span>
-    </div>
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-warning">@ViewBag.Message</div>
+}
 
-    <div class="mb-3">
-        <strong>@Model.Option3Text:</strong>
-        <span class="badge bg-warning text-dark">@Model.Option3VotesCount vote(s)</span>
-    </div>
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>Option</th>
+            <th>Votes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Option1Text</td>
+            <td>@Model.Option1VotesCount</td>
+        </tr>
+        <tr>
+            <td>@Model.Option2Text</td>
+            <td>@Model.Option2VotesCount</td>
+        </tr>
+        <tr>
+            <td>@Model.Option3Text</td>
+            <td>@Model.Option3VotesCount</td>
+        </tr>
+    </tbody>
+</table>
 
-    <hr />
-    <p class="text-muted">
-		<strong>Total Votes:</strong> @Model.Option1VotesCount + @Model.Option2VotesCount + @Model.Option3VotesCount
-    </p>
-
-    <a asp-action="Index" class="btn btn-secondary mt-3">Back to Polls</a>
-</div>
+<a asp-action="Index" class="btn btn-secondary">Back to Polls</a>

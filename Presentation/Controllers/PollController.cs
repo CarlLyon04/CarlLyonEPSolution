@@ -1,17 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Domain.Interfaces;
+﻿using Domain.Interfaces;
 using Domain.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Presentation.Models;
+using System.Security.Claims;
 
 namespace Presentation.Controllers
 {
     public class PollController : Controller
     {
         private readonly IPollRepository _pollRepository;
+        private readonly ILogVoteRepository _logVoteRepository;
 
-        public PollController(IPollRepository pollRepository)
+        public PollController(IPollRepository pollRepository, ILogVoteRepository logVoteRepository)
         {
             _pollRepository = pollRepository;
+            _logVoteRepository = logVoteRepository;
         }
 
         // GET: /Poll
@@ -43,9 +47,6 @@ namespace Presentation.Controllers
                 Option1Text = model.Option1Text,
                 Option2Text = model.Option2Text,
                 Option3Text = model.Option3Text,
-                Option1VotesCount = 0,
-                Option2VotesCount = 0,
-                Option3VotesCount = 0,
                 CreatedDate = DateTime.Now
             };
 
@@ -54,6 +55,7 @@ namespace Presentation.Controllers
         }
 
         // GET: /Poll/Vote/5
+        [Authorize]
         [HttpGet]
         public IActionResult Vote(int id)
         {
@@ -73,27 +75,23 @@ namespace Presentation.Controllers
         }
 
         // POST: /Poll/Vote
+        [Authorize]
         [HttpPost]
         public IActionResult Vote(VoteViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                var poll = _pollRepository.GetPollById(model.id);
-                model.Title = poll.Title;
-                model.Option1Text = poll.Option1Text;
-                model.Option2Text = poll.Option2Text;
-                model.Option3Text = poll.Option3Text;
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-                return View("Vote", model);
+            if (_logVoteRepository.hasVoted(userId, model.id))
+            {
+                TempData["Message"] = "You have already voted on this poll.";
+                return RedirectToAction("Results", new { id = model.id });
             }
 
             _pollRepository.Vote(model.id, model.chosenOption);
+            _logVoteRepository.logVote(userId, model.id);
+
             return RedirectToAction("Results", new { id = model.id });
         }
-
-
-
-
 
         // GET: /Poll/Results/5
         public IActionResult Results(int id)
@@ -112,6 +110,7 @@ namespace Presentation.Controllers
                 Option3VotesCount = poll.Option3VotesCount
             };
 
+            ViewBag.Message = TempData["Message"];
             return View(viewModel);
         }
     }
