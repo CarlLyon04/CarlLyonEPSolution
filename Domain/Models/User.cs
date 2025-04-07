@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Models
 {
+    // / User class that inherits from IdentityUser
     public class User : IdentityUser
     {
       

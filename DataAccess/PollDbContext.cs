@@ -15,8 +15,11 @@ namespace DataAccess
         public PollDbContext(DbContextOptions<PollDbContext> options) : base(options)
         {
         }
+
+        // Models the polls table in the DB
         public DbSet<Poll> Polls { get; set; }
 
+        // Models the logged votes in the DB
         public DbSet<LogVote> LogVotes { get; set; }
     }
 }

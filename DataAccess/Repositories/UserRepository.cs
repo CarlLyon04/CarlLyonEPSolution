@@ -11,32 +11,40 @@ namespace DataAccess.Repositories
 {
     public class UserRepository : IUserRepository
     {
+        // Store dependency
         private readonly PollDbContext _context;
+
+        // Consturtor dpendency
         public UserRepository(PollDbContext context)
         {
             _context = context;
         }
 
+        // Not required
         public void CreateUser(User user)
         {
             throw new NotImplementedException();
         }
 
+        // Not required
         public void DeleteUser(User user)
         {
             throw new NotImplementedException();
         }
 
+        // Not required
         public IEnumerable<User> GetAllUsers()
         {
             throw new NotImplementedException();
         }
 
+        // Not required
         public User? GetUserById(int id)
         {
             throw new NotImplementedException();
         }
 
+        // Not required
         public void UpdateUser(User user)
         {
             throw new NotImplementedException();
