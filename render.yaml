@@ -10,4 +10,3 @@ services:
     env: 
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
-step
